@@ -40,6 +40,7 @@ const INITIAL_BALANCES: BalancesMap = {
   PLN: 1500,
   USD: 1000,
   SEK: 500,
+  GBP: 3000,
 };
 
 const INITIAL_EXCHANGE_STATE: ExchangeState = {

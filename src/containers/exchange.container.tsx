@@ -28,6 +28,11 @@ const GridWithTopMargin = styled(Grid)({
   zIndex: 1,
 });
 
+const FixedWidthChip = styled(Chip)({
+  minWidth: 160,
+  background: '#fff',
+});
+
 export const Exchange: FC = () => {
   const dispatch = useDispatch();
 
@@ -85,7 +90,7 @@ export const Exchange: FC = () => {
         </IconButton>
       </Grid>
       <Grid item xs="auto">
-        <Chip label={baseRateLabel} color="primary" variant="outlined" />
+        <FixedWidthChip label={baseRateLabel} color="primary" variant="outlined" />
       </Grid>
       <Grid item xs={12}>
         <div data-testid="target-input">

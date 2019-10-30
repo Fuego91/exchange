@@ -8,6 +8,7 @@ import {
   RatesUpdated,
   ExecuteExchange,
 } from 'actions/exchange.actions';
+import { CURRENCIES_MAP } from 'containers/exchange.constants';
 
 describe('exchange reducer', () => {
   const RATES_MOCK: RatesMap = {
@@ -78,59 +79,38 @@ describe('exchange reducer', () => {
 
   describe('on SourceCurrencyChangedAction', () => {
     it('should flip inputs if code from payload is the same as target currency code', () => {
-      const payload = {
-        code: 'PLN',
-        fullName: '',
-      };
-
-      const { source, target } = exchangeReducer(INITIAL_STATE, SourceCurrencyChanged(payload));
+      const { source, target } = exchangeReducer(
+        INITIAL_STATE,
+        SourceCurrencyChanged(CURRENCIES_MAP.PLN)
+      );
 
       expect(source).toEqual(INITIAL_STATE.target);
       expect(target).toEqual(INITIAL_STATE.source);
     });
     it('should set code from payload to source currency', () => {
-      const payload = {
-        code: 'SEK',
-        fullName: '',
-      };
+      const { source } = exchangeReducer(INITIAL_STATE, SourceCurrencyChanged(CURRENCIES_MAP.SEK));
 
-      const { source } = exchangeReducer(INITIAL_STATE, SourceCurrencyChanged(payload));
-
-      expect(source.currencyCode).toEqual(payload.code);
+      expect(source.currencyCode).toEqual(CURRENCIES_MAP.SEK.code);
     });
   });
 
   describe('on TargetCurrencyChangedAction', () => {
     it('should flip inputs if code from payload is the same as source currency code', () => {
-      const payload = {
-        code: 'USD',
-        fullName: '',
-      };
-
-      const { source, target } = exchangeReducer(INITIAL_STATE, TargetCurrencyChanged(payload));
+      const { source, target } = exchangeReducer(
+        INITIAL_STATE,
+        TargetCurrencyChanged(CURRENCIES_MAP.USD)
+      );
 
       expect(source).toEqual(INITIAL_STATE.target);
       expect(target).toEqual(INITIAL_STATE.source);
     });
     it('should set code from payload to target currency', () => {
-      const payload = {
-        code: 'SEK',
-        fullName: '',
-        symbol: '',
-      };
+      const { target } = exchangeReducer(INITIAL_STATE, TargetCurrencyChanged(CURRENCIES_MAP.SEK));
 
-      const { target } = exchangeReducer(INITIAL_STATE, TargetCurrencyChanged(payload));
-
-      expect(target.currencyCode).toEqual(payload.code);
+      expect(target.currencyCode).toEqual(CURRENCIES_MAP.SEK.code);
     });
     it('should recalculate source amount', () => {
-      const payload = {
-        code: 'SEK',
-        fullName: '',
-        symbol: '',
-      };
-
-      const { source } = exchangeReducer(INITIAL_STATE, TargetCurrencyChanged(payload));
+      const { source } = exchangeReducer(INITIAL_STATE, TargetCurrencyChanged(CURRENCIES_MAP.SEK));
 
       expect(source.amount).toEqual('3.33');
     });
