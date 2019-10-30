@@ -54,7 +54,10 @@ const getNewSourceAmount = (
   targetCurrencyCode: string,
   rates: RatesMap
 ): string => {
-  const sourceAmount = +targetAmount / rates[targetCurrencyCode] || 0;
+  const rate = rates[targetCurrencyCode];
+  const fullAmount = +targetAmount / rates[targetCurrencyCode] || 0;
+  const sourceAmount =
+    rate < 1 ? Math.ceil(fullAmount * 100) / 100 : Math.floor(fullAmount * 100) / 100;
   return sourceAmount.toFixed(2).toString();
 };
 
@@ -63,7 +66,10 @@ const getNewTargetAmount = (
   targetCurrencyCode: string,
   rates: RatesMap
 ): string => {
-  const targetAmount = +sourceAmount * rates[targetCurrencyCode] || 0;
+  const rate = rates[targetCurrencyCode];
+  const fullAmount = +sourceAmount * rate || 0;
+  const targetAmount =
+    rate < 1 ? Math.floor(fullAmount * 100) / 100 : Math.ceil(fullAmount * 100) / 100;
   return targetAmount.toFixed(2).toString();
 };
 

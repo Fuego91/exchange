@@ -116,6 +116,7 @@ describe('exchange reducer', () => {
       const payload = {
         code: 'SEK',
         fullName: '',
+        symbol: '',
       };
 
       const { target } = exchangeReducer(INITIAL_STATE, TargetCurrencyChanged(payload));
@@ -126,6 +127,7 @@ describe('exchange reducer', () => {
       const payload = {
         code: 'SEK',
         fullName: '',
+        symbol: '',
       };
 
       const { source } = exchangeReducer(INITIAL_STATE, TargetCurrencyChanged(payload));
@@ -146,7 +148,7 @@ describe('exchange reducer', () => {
       expect(reducerResult.rates).toEqual(payload);
     });
     it('should recalculate target amount', () => {
-      expect(reducerResult.target.amount).toEqual('26.17');
+      expect(reducerResult.target.amount).toEqual('26.18');
     });
   });
 
