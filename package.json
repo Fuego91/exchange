@@ -56,7 +56,7 @@
     "fetch-mock": "^8.0.0-alpha.11",
     "gh-pages": "^2.1.1",
     "node-fetch": "^2.6.0",
-    "node-sass": "^4.12.0",
+    "node-sass": "^7.0.0",
     "prettier": "^1.18.2",
     "react-test-renderer": "^16.11.0",
     "redux-devtools-extension": "^2.13.8",
